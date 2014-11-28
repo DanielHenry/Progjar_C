@@ -20,13 +20,28 @@ class ThreadServer implements Runnable
 			char[] kalimat = new char[1000];
 			int buf;
 			char c;
-			for (int i=0; (buf = is.read())!=-1; i++)
+			while (true)
 			{
-				c = (char)buf;
-				kalimat[i] = c;
+				int i;
+				for (i=0; true; i++)
+				{
+					//System.out.printf("Bisa %d !!\n",i);
+					buf = is.read();
+					c = (char)buf;
+					kalimat[i] = c;
+					if (c=='\n') break;
+				}
+				//System.out.println("Bisa nggak ya!!");
+				kalimat[i] = '\0';
+				
+				//System.out.println("Bisa nggak ya!!");
+				
+				String pesan = kalimat.toString();
+				
+				//System.out.println("Bisa nggak ya!!");
+				
+				os.write(pesan.getBytes());
 			}
-			String pesan = kalimat.toString();
-			os.write(pesan.getBytes());
 		}
 		catch (IOException e)
 		{
