@@ -17,13 +17,14 @@ public class ServerMain
 			{
 				ServerSocket serversocket = new ServerSocket(1234);
 				Socket clientsocket = serversocket.accept();
+                                System.out.println("Accepted connection at" + clientsocket.getRemoteSocketAddress().toString());
 				ThreadServer thread = new ThreadServer(clientsocket);
 				thread.run();
 			}
 		}
 		catch(IOException e)
 		{
-			System.out.println("Ada yang salah dengan semua ini dari server utama!!!");
+			e.printStackTrace();
 		}
 	}
 }
