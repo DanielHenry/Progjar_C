@@ -30,8 +30,8 @@ public class FileHave extends CommunicationObject {
         super(classEnum, subClassEnum, Type);
     }
     
-    public FileHave(int classEnum, String Type){
-        super(classEnum, Type);
+    public FileHave(int classEnum, int subClassEnum){
+        super(classEnum, subClassEnum);
     }
     
     public FileHave(int classEnum){
@@ -46,7 +46,7 @@ public class FileHave extends CommunicationObject {
         return this.size;
     }
 
-    public InetAddress GetSocket() {
+    public InetAddress GetAddr() {
         return this.remoteAddr;
     }
 
@@ -62,8 +62,8 @@ public class FileHave extends CommunicationObject {
         this.size = size;
     }
 
-    public void SetSocket(InetAddress socket) {
-        this.remoteAddr = socket;
+    public void SetAddr(InetAddress addr) {
+        this.remoteAddr = addr;
     }
 
     public void SetMD5Hash(byte[] hash) {

@@ -34,10 +34,10 @@ public class CommunicationObject implements Serializable {
         this.classType = Type;
     }
     
-    public CommunicationObject(int classEnum, String Type){
+    public CommunicationObject(int classEnum, int subClassEnum){
         this.classTypeEnum = classEnum;
-        this.subClassTypeEnum = 0;
-        this.classType = Type;
+        this.subClassTypeEnum = subClassEnum;
+        this.classType = "Refer Index of Class Type Enum for details";
     }
     public CommunicationObject(int classEnum){
         this.classTypeEnum = classEnum;

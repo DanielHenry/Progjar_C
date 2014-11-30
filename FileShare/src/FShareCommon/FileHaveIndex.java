@@ -22,14 +22,14 @@ import java.util.*;
  */
 public class FileHaveIndex extends FileHave {
 
-    private ArrayList<InetAddress> remoteList;
+    private ArrayList<InetAddress> remoteList=null;
 
     public FileHaveIndex(int classEnum, int subClassEnum, String Type) {
         super(classEnum, subClassEnum, Type);
     }
     
-    public FileHaveIndex(int classEnum, String Type) {
-        super(classEnum, Type);
+    public FileHaveIndex(int classEnum, int subClassEnum) {
+        super(classEnum, subClassEnum);
     }
     
     public FileHaveIndex(int classEnum) {

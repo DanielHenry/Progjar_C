@@ -2,7 +2,6 @@ package FShareServer;
 
 import java.io.*;
 import java.util.*;
-import java.lang.Runnable;
 import java.net.Socket;
 import FShareCommon.*;
 import java.util.logging.Level;
@@ -49,6 +48,29 @@ class ThreadServer implements Runnable {
                 CommunicationObject input = (CommunicationObject) streamIn.readObject();
                 if (input.GetClassTypeEnum() == 1) {
                     FileHave obj = (FileHave) input;
+                    
+                    // If object is FileHave
+                    
+                    if(obj.GetSubClassTypeEnum()==1){
+                        byte[] hash = obj.GetMD5Hash();
+                        boolean found = false;
+                        for(int i=0;i<index.size();i++){
+                            int comp = index.get(i).CompareHash(hash);
+                            if(comp==1){
+                                found=true;
+                                index.get(i).AddRemoteNode(obj.GetAddr());
+                                break;
+                            }
+                        }
+                        if(!found){
+                            FileHaveIndex temp = new FileHaveIndex(3, 0);
+                            temp.SetFilename(obj.GetFilename());
+                            temp.SetMD5Hash(obj.GetMD5Hash());
+                            temp.SetSize(obj.GetSize());
+                            temp.AddRemoteNode(obj.GetAddr());
+                        }
+                    }
+                    // End FileHave
                 }
             }
 
