@@ -12,9 +12,11 @@ class ThreadServer implements Runnable {
     public ThreadServer(Socket clientsocket) {
         this.clientsocket = clientsocket;
     }
-    public void setIndex(){
-        
+
+    public void setIndex() {
+
     }
+
     @Override
     public void run() {
         try {

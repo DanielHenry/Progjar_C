@@ -10,22 +10,28 @@ package FShareCommon;
  * @author REMOTE
  */
 public class CommunicationObject {
+
     private String classType;
     private int classTypeEnum;
-    public CommunicationObject(int classEnum, String Type){
-        this.classTypeEnum=classEnum;
-        this.classType=Type;
-    } 
-    public String GetClassType(){
+
+    public CommunicationObject(int classEnum, String Type) {
+        this.classTypeEnum = classEnum;
+        this.classType = Type;
+    }
+
+    public String GetClassType() {
         return this.classType;
     }
-    public int GetClassTypeEnum(){
+
+    public int GetClassTypeEnum() {
         return this.classTypeEnum;
     }
-    public void SetClassType(String Type){
-        this.classType=Type;
+
+    public void SetClassType(String Type) {
+        this.classType = Type;
     }
-    public void SetClassTypeEnum(int Type){
-        this.classTypeEnum=Type;
+
+    public void SetClassTypeEnum(int Type) {
+        this.classTypeEnum = Type;
     }
 }

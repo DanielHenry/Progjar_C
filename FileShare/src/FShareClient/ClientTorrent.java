@@ -32,7 +32,7 @@ public class ClientTorrent {
                 }
             }
         } catch (Exception e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
