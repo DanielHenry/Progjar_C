@@ -9,7 +9,15 @@ import java.net.*;
 
 /**
  *
- * @author REMOTE
+ * @author Ardhinata Juari <ardhinata.juari@gmail.com>
+ */
+
+/**
+ * ------------------------------------------------
+ * Index of SubClass Type Enum
+ * 0 = Not Set
+ * 1 = Declare FileHave to server
+ * ------------------------------------------------
  */
 public class FileHave extends CommunicationObject {
 
@@ -18,8 +26,16 @@ public class FileHave extends CommunicationObject {
     private InetAddress remoteAddr;
     private byte[] MD5Hash;
 
-    public FileHave(int classEnum, String Type) {
+    public FileHave(int classEnum, int subClassEnum, String Type) {
+        super(classEnum, subClassEnum, Type);
+    }
+    
+    public FileHave(int classEnum, String Type){
         super(classEnum, Type);
+    }
+    
+    public FileHave(int classEnum){
+        super(classEnum);
     }
 
     public String GetFilename() {

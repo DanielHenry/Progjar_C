@@ -10,14 +10,30 @@ import java.util.*;
 
 /**
  *
- * @author REMOTE
+ * @author Ardhinata Juari
+ * 5112100094
+ */
+
+/**
+ * ------------------------------------------------
+ * Index of SubClass Type Enum
+ * 0 = Default
+ * ------------------------------------------------
  */
 public class FileHaveIndex extends FileHave {
 
     private ArrayList<InetAddress> remoteList;
 
+    public FileHaveIndex(int classEnum, int subClassEnum, String Type) {
+        super(classEnum, subClassEnum, Type);
+    }
+    
     public FileHaveIndex(int classEnum, String Type) {
         super(classEnum, Type);
+    }
+    
+    public FileHaveIndex(int classEnum) {
+        super(classEnum);
     }
 
     public ArrayList<InetAddress> GetAddrList() {
