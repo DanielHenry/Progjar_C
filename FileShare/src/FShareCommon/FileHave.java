@@ -23,7 +23,7 @@ public class FileHave extends CommunicationObject {
 
     private String filename;
     private int size;
-    private InetAddress remoteAddr;
+    private InetAddress remoteAddr=null;
     private byte[] MD5Hash;
 
     public FileHave(int classEnum, int subClassEnum, String Type) {
