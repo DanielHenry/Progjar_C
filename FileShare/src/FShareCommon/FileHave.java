@@ -37,6 +37,10 @@ public class FileHave extends CommunicationObject {
     public FileHave(int classEnum){
         super(classEnum);
     }
+    
+    public FileHave(){
+        super(2);
+    }
 
     public String GetFilename() {
         return this.filename;

@@ -19,6 +19,8 @@ import java.io.*;
  * 1 = Reserved
  * 2 = FileHave
  * 3 = FileHaveIndex
+ * 4 = FileRequest
+ * 5 = ServerResponse
  * ------------------------------------------------
  */
 

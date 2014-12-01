@@ -35,6 +35,10 @@ public class FileHaveIndex extends FileHave {
     public FileHaveIndex(int classEnum) {
         super(classEnum);
     }
+    
+    public FileHaveIndex() {
+        super(3);
+    }
 
     public ArrayList<InetAddress> GetAddrList() {
         return this.remoteList;

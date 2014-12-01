@@ -46,11 +46,11 @@ class ThreadServer implements Runnable {
             streamIn = new ObjectInputStream(clientsocket.getInputStream());
             if (streamIn != null) {
                 CommunicationObject input = (CommunicationObject) streamIn.readObject();
+                
+                // If object is FileHave
+                
                 if (input.GetClassTypeEnum() == 1) {
                     FileHave obj = (FileHave) input;
-                    
-                    // If object is FileHave
-                    
                     if(obj.GetSubClassTypeEnum()==1){
                         byte[] hash = obj.GetMD5Hash();
                         boolean found = false;
@@ -70,7 +70,33 @@ class ThreadServer implements Runnable {
                             temp.AddRemoteNode(obj.GetAddr());
                         }
                     }
-                    // End FileHave
+                }
+                // End FileHave
+                
+                // If input is FileRequest
+                if(input.GetClassTypeEnum()==4){
+                    FileRequest fr = (FileRequest) input;
+                    ServerResponse sr = new ServerResponse();
+                    int match = -1;
+                    for(int i=0;i<index.size();i++){
+                        if(fr.GetSize()==index.get(i).GetSize()){
+                            if(index.get(i).CompareHash(fr.GetHash())==1){
+                                match=i;
+                                break;
+                            }
+                        }
+                    }
+                    if(match!=-1){
+                        sr.SetOnServer(false);
+                        streamOut=new ObjectOutputStream(clientsocket.getOutputStream());
+                        streamOut.writeObject(sr);
+                    }
+                    else{
+                        sr.SetOnServer(true);
+                        sr.SetListNode(index.get(match).GetAddrList());
+                        streamOut=new ObjectOutputStream(clientsocket.getOutputStream());
+                        streamOut.writeObject(sr);
+                    }
                 }
             }
 

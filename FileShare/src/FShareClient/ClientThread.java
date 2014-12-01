@@ -13,6 +13,7 @@ import FShareCommon.*;
 import java.nio.file.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import FShareCommon.*;
 
 /**
  *
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
  * Index of Method
  * 0 = Not Set
  * 1 = Create File Descriptor
+ * 2 = Load file descriptor
  * ------------------------------------------------
  */
 public class ClientThread implements Runnable {
@@ -53,16 +55,16 @@ public class ClientThread implements Runnable {
                     System.out.println("System cannot find the file.");
                     return;
                 } else {
-                    size=(int) file.length();
-                    filename=file.getName();
+                    size = (int) file.length();
+                    filename = file.getName();
                     byte[] digest = null;
                     md = MessageDigest.getInstance("MD5");
                     InputStream is = Files.newInputStream(Paths.get(path));
                     DigestInputStream dis = new DigestInputStream(is, md);
                     digest = md.digest();
                     System.out.println("MD5 hash: " + BytePrint.bytesToHex(digest));
-                    while(path.charAt(path.length()-1)!='\\'){
-                        path = path.substring(0, path.length()-1);
+                    while (path.charAt(path.length() - 1) != '\\') {
+                        path = path.substring(0, path.length() - 1);
                     }
                     FileHave fh = new FileHave(2);
                     fh.SetFilename(filename);
@@ -80,6 +82,40 @@ public class ClientThread implements Runnable {
             } catch (NoSuchAlgorithmException | IOException ex) {
                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+
+        if (method == 2) {
+            String desc = command.substring(5);
+            String path = desc.substring(0, desc.length()-3);
+            File fdesc = new File(desc);
+            File fpath=new File(path);
+            if(fdesc.isDirectory() || !fdesc.exists()){
+                System.out.println("File descriptor not found");
+                return;
+            }else{
+                ObjectInputStream ois = null;
+                FileHave fh=null;
+                try {
+                    FileInputStream fis = new FileInputStream(fdesc);
+                    ois = new ObjectInputStream(fis);
+                    fh = (FileHave) ois.readObject();
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        ois.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if(!fpath.exists()){
+                    FileRequest fr = new FileRequest();
+                    fr.SetSize(fh.GetSize());
+                    fr.SetHash(fh.GetMD5Hash());
+                    
+                }
+            }
+            
         }
     }
 

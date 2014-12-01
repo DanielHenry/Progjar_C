@@ -40,13 +40,24 @@ public class ClientTorrent {
                 String low = m;
                 low.toLowerCase();
                 System.out.println(low);
-                if(low.startsWith("help"))PrintHelp();
                 if(low.startsWith("create")){
                     System.out.println("Create initialized");
                     ClientThread thread = new ClientThread();
                     thread.SetMethod(1);
                     thread.SetCommand(m);
+                    listThread.add(thread);
                     thread.run();
+                }
+                else if(low.startsWith("load")){
+                    System.out.println("Load initialized");
+                    ClientThread thread = new ClientThread();
+                    thread.SetMethod(2);
+                    thread.SetCommand(m);
+                    listThread.add(thread);
+                    thread.run();
+                }
+                else{
+                    PrintHelp();
                 }
             }
         } catch (Exception e) {
@@ -54,7 +65,7 @@ public class ClientTorrent {
         }
     }
     public static void PrintHelp(){
-        
+        System.out.println("Command list:\nCREATE: create file descriptor");
     }
 
 }
