@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class FileHaveIndex extends FileHave {
 
-    private ArrayList<InetAddress> remoteList=null;
+    private ArrayList<InetAddress> remoteList=new ArrayList<>();
 
     public FileHaveIndex(int classEnum, int subClassEnum, String Type) {
         super(classEnum, subClassEnum, Type);

@@ -34,6 +34,7 @@ public class ClientThread implements Runnable {
     private int method = 0;
     private String command = null;
     private MessageDigest md = null;
+    private ArrayList<FileSeed> seedIndex = null;
 
     public void SetMethod(int method) {
         this.method = method;
@@ -41,6 +42,14 @@ public class ClientThread implements Runnable {
 
     public void SetCommand(String command) {
         this.command = command;
+    }
+    
+    public void SetSeedIndex(ArrayList<FileSeed> seedIndex){
+        this.seedIndex=seedIndex;
+    }
+    
+    public void SetServerSocket(Socket sock){
+        this.sock=sock;
     }
 
     @Override
@@ -112,7 +121,20 @@ public class ClientThread implements Runnable {
                     FileRequest fr = new FileRequest();
                     fr.SetSize(fh.GetSize());
                     fr.SetHash(fh.GetMD5Hash());
-                    
+                    // TODO thread downloader
+                }
+                else{
+                    FileHave fhs = new FileHave();
+                    fhs.SetFilename(fh.GetFilename());
+                    fhs.SetMD5Hash(fh.GetMD5Hash());
+                    fhs.SetSize(fh.GetSize());
+                    ObjectOutputStream oos;
+                    try {
+                        oos = new ObjectOutputStream(sock.getOutputStream());
+                    } catch (IOException ex) {
+                        Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    oos.writeObject(fhs);
                 }
             }
             

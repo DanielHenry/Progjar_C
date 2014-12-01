@@ -21,6 +21,7 @@ import java.io.*;
  * 3 = FileHaveIndex
  * 4 = FileRequest
  * 5 = ServerResponse
+ * 6 = FileSeed
  * ------------------------------------------------
  */
 

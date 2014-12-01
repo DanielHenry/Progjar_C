@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class ServerResponse extends CommunicationObject{
     private boolean onServer=false;
-    private ArrayList<InetAddress> listNode=null;
+    private ArrayList<InetAddress> listNode=new ArrayList<>();
 
     public ServerResponse(int classEnum) {
         super(classEnum);

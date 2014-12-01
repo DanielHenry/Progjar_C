@@ -12,11 +12,12 @@ import FShareCommon.*;
 public class ClientTorrent {
 
     public static void main(String[] args) {
-        ArrayList<ClientThread> listThread=null;
+        ArrayList<ClientThread> listThread=new ArrayList<>();
+        ArrayList<FileSeed> seedIndex=new ArrayList<>();
+        Socket serverSock = null;
         try {
             Scanner scan = new Scanner(System.in);
             String m;
-            Socket client = null;
 
             /*InputStream r = client.getInputStream();
             OutputStream w = client.getOutputStream();
@@ -50,11 +51,22 @@ public class ClientTorrent {
                 }
                 else if(low.startsWith("load")){
                     System.out.println("Load initialized");
+                    if(serverSock==null){
+                        System.out.println("Initialize server first!");
+                        continue;
+                    }
                     ClientThread thread = new ClientThread();
                     thread.SetMethod(2);
                     thread.SetCommand(m);
+                    thread.SetServerSocket(serverSock);
                     listThread.add(thread);
                     thread.run();
+                }
+                else if(low.startsWith("server")){
+                    System.out.println("Input server IP address: ");
+                    m=scan.nextLine();
+                    serverSock = new Socket(m, 1234);
+                    System.out.println("server IP address: " + serverSock.getInetAddress().toString() + " " + serverSock.getPort());
                 }
                 else{
                     PrintHelp();
