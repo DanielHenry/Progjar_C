@@ -58,7 +58,7 @@ class ThreadServer implements Runnable {
                             int comp = index.get(i).CompareHash(hash);
                             if(comp==1){
                                 found=true;
-                                index.get(i).AddRemoteNode(clientsocket.getInetAddress());
+                                index.get(i).AddRemoteNode(obj.GetAddr());
                                 break;
                             }
                         }
@@ -67,7 +67,7 @@ class ThreadServer implements Runnable {
                             temp.SetFilename(obj.GetFilename());
                             temp.SetMD5Hash(obj.GetMD5Hash());
                             temp.SetSize(obj.GetSize());
-                            temp.AddRemoteNode(clientsocket.getInetAddress());
+                            temp.AddRemoteNode(obj.GetAddr());
                         }
                     }
                 }
